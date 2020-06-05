@@ -3,11 +3,13 @@ from myRSA import *
 if __name__ == '__main__':
     sender = myRSA()
 
-    pe = int(input("Enter the partner's e: "))
-    pn = int(input("Enter the partner's n: "))
+    key = input("Enter the partner's key: ")
+    key = key.strip('{}') # To take {} away
+    key = key.split(', ') # By now the key is a list containing integers that are strings actually
+    key = tuple(int(n) for n in key) # And now the integers are really integers
 
-    key = input("Enter your key: ")
+    sender.setPartnerKey(key)
 
-    sender.setPartnerKey((pe, pn))
+    plaintext = input("Enter the key: ")
 
-    print(sender.encrypt(key))
+    print(sender.encrypt(plaintext))
